@@ -19,12 +19,15 @@
 <h2>Super c'est ton appli ! </h2>
 <main class="main">
     <div id="notification" class="shadow hoverable full-rounded">Notification</div>
-    <div class="container shadow much-rounded">
+    <div class="container">
         <?php
         include($template_view);
         ?>
     </div>
 </main>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://pedago.univ-avignon.fr/~uapv1901496/omegadesign/js/omegadesign.js"></script>
 </body>
 
 
