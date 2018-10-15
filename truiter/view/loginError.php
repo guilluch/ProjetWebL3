@@ -10,6 +10,6 @@
             <label for="password" class="internal-label">Password</label>
         </div>
         <input class="btn full-rounded shadow h-align-center waves-effect waves-light" type="submit" value="Login"/>
-<!--        <button class="btn full-rounded shadow h-align-center waves-effect waves-light" type="submit">Login</button>-->
+        <!--        <button class="btn full-rounded shadow h-align-center waves-effect waves-light" type="submit">Login</button>-->
     </form>
 </div>

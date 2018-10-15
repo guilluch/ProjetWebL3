@@ -62,12 +62,15 @@ class context
 	{
 		$_SESSION[$attribute]=$value;
 	}
-    
-	
-	
-	public function __get($prop)
+
+
+
+    public function __get($prop)
     {
-        return $this->data[$prop];      
+        if(array_key_exists($prop, $this->data))
+            return $this->data[$prop];
+        else
+            return NULL;
     }
     
     public function __set($prop,$value) 

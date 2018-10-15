@@ -6,16 +6,17 @@
 class mainController
 {
 
-    public static function helloWorld($request,$context)
-    {
-        $context->mavariable="hello world";
-        return context::SUCCESS;
+    public static function helloWorld($request,$context) {
+        if (isset($_SESSION)) {
+            $context->mavariable="hello world";
+            return context::SUCCESS;
+        } else {
+            return context::ERROR;
+        }
     }
 
 
-
-    public static function index($request,$context)
-    {
+    public static function index($request,$context) {
         return context::SUCCESS;
     }
 
@@ -26,12 +27,24 @@ class mainController
         return context::SUCCESS;
     }
 
+
     public static function login($request, $context) {
         if (isset($request['username']) && isset($request['password'])) {
             $context->session = utilisateurTable::getUserByLoginAndPass($request['username'], $request['password']);
+            if (!$context->session) {
+                $context->message = 'Error with the username or the password';
+                return context::ERROR;
+            } else {
+//                var_dump($context->session[0]);
+                context::getInstance()->setSessionAttribute('prenom', $context->session[0]['prenom']);
+                $context->message = 'Bonjour, ' . context::getInstance()->getSessionAttribute('prenom');
+//                context::getInstance()->executeAction('index', $request);
+
+//                session_start();
+
+            }
         }
-        $context->dbconnection = new dbconnection();
+        new dbconnection();
         return context::SUCCESS;
     }
-
 }
