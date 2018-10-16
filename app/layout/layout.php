@@ -9,19 +9,20 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" type="text/css" href="https://pedago.univ-avignon.fr/~uapv1901496/projet-web-l3/css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="https://pedago.univ-avignon.fr/~uapv1901496/omegadesign/css/omegadesign.css">
+    <link rel="stylesheet" type="text/css" href="http://omegaserv.net/omegadesign/css/omegadesign.css">
 </head>
 
 <body>
 <header>
     <nav class="navbar">
         <ul>
-            <li><a class="waves-effect waves-light" href="https://pedago.univ-avignon.fr/~uapv1901496/projet-web-l3/">Home</a></li>
-            <li><a class="waves-effect waves-light" href="https://pedago.univ-avignon.fr/~uapv1901496/projet-web-l3/?action=helloWorld">Hello World</a></li>
-            <li><a class="waves-effect waves-light" href="https://pedago.univ-avignon.fr/~uapv1901496/projet-web-l3/?action=superTest&param1=le_premier_parametre&param2=le_second_parametre">SuperTest</a></li>
+            <li><a class="waves-effect waves-light" href="?action=index">Home</a></li>
+            <li><a class="waves-effect waves-light" href="?action=helloWorld">Hello World</a></li>
+            <li><a class="waves-effect waves-light" href="?action=superTest&param1=le_premier_parametre&param2=le_second_parametre">SuperTest</a></li>
             <li class="placeholder"></li>
-            <li><a class="waves-effect waves-light" href="https://pedago.univ-avignon.fr/~uapv1901496/projet-web-l3/?action=login">Login</a></li>
+            <li><a class="waves-effect waves-light" href="?action=login">Login</a></li>
             <li><a class="waves-effect waves-light">Logout</a></li>
         </ul>
     </nav>
@@ -42,6 +43,7 @@
 </main>
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://omegaserv.net/omegadesign/js/omegadesign.js"></script>
 <script type="text/javascript" src="https://pedago.univ-avignon.fr/~uapv1901496/omegadesign/js/omegadesign.js"></script>
 </body>
 

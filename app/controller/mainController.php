@@ -42,7 +42,7 @@ class mainController
 
             }
         }
-        new dbconnection();
+//        new dbconnection();
         return context::SUCCESS;
     }
 }
