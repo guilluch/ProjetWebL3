@@ -7,7 +7,7 @@ class mainController
 {
 
     public static function helloWorld($request,$context) {
-        if (isset($_SESSION)) {
+        if (context::getInstance()->getSessionAttribute('connected')) {
             $context->mavariable="hello world";
             return context::SUCCESS;
         } else {
@@ -32,9 +32,10 @@ class mainController
         if (isset($request['username']) && isset($request['password'])) {
             $context->session = utilisateurTable::getUserByLoginAndPass($request['username'], $request['password']);
             if (!$context->session) {
-                $context->message = 'Error with the username or the password';
+                $context->message = 'Erreur avec l\'identifiant ou le mot de passe';
                 return context::ERROR;
             } else {
+                context::getInstance()->setSessionAttribute('connected', true);
                 context::getInstance()->setSessionAttribute('prenom', $context->session[0]['prenom']);
                 $context->message = 'Bonjour, ' . context::getInstance()->getSessionAttribute('prenom');
 

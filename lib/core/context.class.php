@@ -55,7 +55,11 @@ class context
 	
 	public function getSessionAttribute($attribute)
 	{
-		return $_SESSION[$attribute];
+	    if (array_key_exists($attribute, $_SESSION)) {
+            return $_SESSION[$attribute];
+        } else {
+	        return NULL;
+        }
 	}
 	
 	public function setSessionAttribute($attribute,$value)
