@@ -3,13 +3,12 @@
  * Controller
  */
 
-class mainController
-{
+class mainController {
 
-    public static function helloWorld($request,$context) {
+    public static function helloWorld($request, $context) {
         // Si l'utilisateur est connecté
         if (context::getInstance()->getSessionAttribute('connected')) {
-            $context->mavariable="hello world";
+            $context->mavariable = "hello world";
             return context::SUCCESS;
         } else {
             return context::ERROR;
@@ -17,7 +16,7 @@ class mainController
     }
 
 
-    public static function index($request,$context) {
+    public static function index($request, $context) {
         return context::SUCCESS;
     }
 
@@ -45,5 +44,10 @@ class mainController
             }
         }
         return context::SUCCESS;
+    }
+
+    public static function logout($request, $context) {
+        session_destroy();
+        header('Location: ?action=login');
     }
 }

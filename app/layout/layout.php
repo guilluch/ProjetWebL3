@@ -24,8 +24,16 @@
             <li><a class="waves-effect waves-light" href="?action=helloWorld">Hello World</a></li>
             <li><a class="waves-effect waves-light" href="?action=superTest&param1=le_premier_parametre&param2=le_second_parametre">SuperTest</a></li>
             <li class="placeholder"></li>
-            <li><a class="waves-effect waves-light" href="?action=login">Login</a></li>
-            <li><a class="waves-effect waves-light">Logout</a></li>
+            <?php
+                if (!context::getInstance()->getSessionAttribute('connected')) {
+                    echo '<li><a class="waves-effect waves-light" href="?action=login">Login</a></li>';
+                }
+            ?>
+            <?php
+                if (context::getInstance()->getSessionAttribute('connected')) {
+                    echo '<li><a class="waves-effect waves-light" href="?action=logout">Logout</a></li>';
+                }
+            ?>
         </ul>
     </nav>
 </header>
