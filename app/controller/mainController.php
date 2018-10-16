@@ -35,12 +35,9 @@ class mainController
                 $context->message = 'Error with the username or the password';
                 return context::ERROR;
             } else {
-//                var_dump($context->session[0]);
                 context::getInstance()->setSessionAttribute('prenom', $context->session[0]['prenom']);
                 $context->message = 'Bonjour, ' . context::getInstance()->getSessionAttribute('prenom');
-//                context::getInstance()->executeAction('index', $request);
 
-//                session_start();
 
             }
         }

@@ -30,7 +30,7 @@
 <h2>Super c'est ton appli ! </h2>
 <main class="main">
     <?php
-        if (isset($context->message)) {
+        if ($context->message !== null) {
             echo '<div id="notification" class="shadow full-rounded">' . $context->message . '</div>';
         }
     ?>
