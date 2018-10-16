@@ -10,6 +10,8 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <!-- Inclusion des fichiers css pour ma bibliothèque css -->
     <link rel="stylesheet" type="text/css" href="https://pedago.univ-avignon.fr/~uapv1901496/omegadesign/css/omegadesign.css">
     <link rel="stylesheet" type="text/css" href="http://omegaserv.net/omegadesign/css/omegadesign.css">
 </head>
@@ -42,6 +44,7 @@
     </div>
 </main>
 
+<!-- Inclusion des fichiers js pour ma bibliothèque css -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://omegaserv.net/omegadesign/js/omegadesign.js"></script>
 <script type="text/javascript" src="https://pedago.univ-avignon.fr/~uapv1901496/omegadesign/js/omegadesign.js"></script>
