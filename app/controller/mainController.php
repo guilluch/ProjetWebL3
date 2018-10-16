@@ -38,11 +38,8 @@ class mainController
                 context::getInstance()->setSessionAttribute('connected', true);
                 context::getInstance()->setSessionAttribute('prenom', $context->session[0]['prenom']);
                 $context->message = 'Bonjour, ' . context::getInstance()->getSessionAttribute('prenom');
-
-
             }
         }
-//        new dbconnection();
         return context::SUCCESS;
     }
 }
