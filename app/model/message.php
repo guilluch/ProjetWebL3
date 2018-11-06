@@ -20,6 +20,6 @@ class message extends basemodel {
     }
 
     public function getLikes() {
-        return $this->aimer;
+        return $this->aime;
     }
 }
