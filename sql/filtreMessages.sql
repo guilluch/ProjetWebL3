@@ -1,5 +1,0 @@
-CREATE OR REPLACE FUNCTION filtreMessages(NUMERIC debut, NUMERIC fin)
-  RETURNS RECORD AS
-$$
-
-$$
