@@ -17,6 +17,7 @@ class mainController {
 
 
     public static function index($request, $context) {
+        $context->friendsList = ['Riri', 'Fifi', 'Loulou'];
         return context::SUCCESS;
     }
 
@@ -41,6 +42,7 @@ class mainController {
                 context::getInstance()->setSessionAttribute('connected', true); // On stocke le booleen de connexion dans la variable de session
                 context::getInstance()->setSessionAttribute('prenom', $context->session[0]['prenom']); // On stocke le prenom dans la variable de session
                 $context->message = 'Bonjour, ' . context::getInstance()->getSessionAttribute('prenom'); // On génére un message de bienvenue pour la notification
+                header('Location: ?action=index');
             }
         }
         return context::SUCCESS;

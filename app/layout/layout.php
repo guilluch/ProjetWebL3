@@ -20,18 +20,18 @@
 <header>
     <nav class="navbar">
         <ul>
-            <li><a class="waves-effect waves-light" href="?action=index">Home</a></li>
-            <li><a class="waves-effect waves-light" href="?action=helloWorld">Hello World</a></li>
-            <li><a class="waves-effect waves-light" href="?action=superTest&param1=le_premier_parametre&param2=le_second_parametre">SuperTest</a></li>
+            <li><a class="waves-effect waves-light" href="?action=index"><i class="material-icons">home</i></a></li>
+<!--            <li><a class="waves-effect waves-light" href="?action=helloWorld">Hello World</a></li>-->
+<!--            <li><a class="waves-effect waves-light" href="?action=superTest&param1=le_premier_parametre&param2=le_second_parametre">SuperTest</a></li>-->
             <li class="placeholder"></li>
             <?php
                 if (!context::getInstance()->getSessionAttribute('connected')) {
-                    echo '<li><a class="waves-effect waves-light" href="?action=login">Login</a></li>';
+                    echo '<li><a class="waves-effect waves-light" href="?action=login">Se connecter</a></li>';
                 }
             ?>
             <?php
                 if (context::getInstance()->getSessionAttribute('connected')) {
-                    echo '<li><a class="waves-effect waves-light" href="?action=logout">Logout</a></li>';
+                    echo '<li><a class="waves-effect waves-light" href="?action=logout">Se déconnecter</a></li>';
                 }
             ?>
         </ul>
@@ -39,6 +39,20 @@
 </header>
 
 <h2>Super c'est ton appli ! </h2>
+
+
+<!--VIEW Liste d'amis-->
+<div class="card rounded friends-list">
+    <h3 class="card-header">Liste d'amis</h3>
+    <div class="card-body">
+        <?php
+        foreach ($context->friendsList as $friend) {
+            echo '<div>' . $friend . '</div>';
+        }
+        ?>
+    </div>
+</div>
+
 <main class="main">
     <?php
         if ($context->message !== null) {
