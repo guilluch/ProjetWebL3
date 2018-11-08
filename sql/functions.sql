@@ -17,7 +17,7 @@ $$
 DECLARE
   resultat REFCURSOR;
 BEGIN
-  OPEN resultat FOR SELECT * FROM message m WHERE m.id = idt LIMIT fin-debut OFFSET debut;
+  OPEN resultat FOR SELECT * FROM message m WHERE m.id = idt LIMIT fin-debut OFFSET debut-1;
   RETURN resultat;
 END;
 $$
