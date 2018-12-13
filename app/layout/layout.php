@@ -43,8 +43,8 @@
 
 <main class="main">
     <?php
-    if (!context::getInstance()->getSessionAttribute('connected')) {
-        include_once '../view/friendList.php';
+    if (context::getInstance()->getSessionAttribute('connected')) {
+        include_once 'app/view/friendList.php';
     }
     if ($context->message !== null) {
         echo '<div id="notification" class="shadow full-rounded">' . $context->message . '</div>';
@@ -54,8 +54,17 @@
         <?php
         include($template_view);
         ?>
+        <?php
+        require 'app/view/profil.php';
+        ?>
     </div>
 </main>
+
+<?php
+if (context::getInstance()->getSessionAttribute('connected')) {
+    include_once 'app/view/mur.php';
+}
+?>
 
 <!-- Inclusion des fichiers js pour ma bibliothèque css -->
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
