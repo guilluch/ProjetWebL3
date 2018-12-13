@@ -7,11 +7,8 @@
             Du texte
         </p>
     </div>
-    <?php
-    echo '<div class="card-footer vote-btn-container">
+    <div class="card-footer vote-btn-container">
         <button class="btn vote-btn full-rounded waves-effect"><i class="material-icons">thumb_up_alt</i></button>
         <button class="btn vote-btn full-rounded waves-effect"><i class="material-icons">thumb_down_alt</i></button>
-    </div>'
-    ?>
-
+    </div>
 </div>
