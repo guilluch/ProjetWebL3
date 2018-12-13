@@ -9,3 +9,14 @@
     top: 4rem;
     left: 0;
 }
+
+.vote-btn-container {
+    justify-content: flex-end;
+}
+
+.vote-btn {
+    background: inherit !important;
+    color: black !important;
+    width: 2.5rem;
+    height: 2.5rem;
+}
