@@ -1,4 +1,4 @@
-<div class="card rounded friends-list">
+<div class="card friends-list">
     <h3 class="card-header">Liste d'amis</h3>
     <div class="card-body">
         <?php

@@ -1,4 +1,4 @@
-<div class="post card slight-rounded hoverable">
+<div class="post card much-rounded hoverable">
     <div class="card-header">
         <span>Utilisateur</span>
     </div>

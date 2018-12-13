@@ -10,6 +10,14 @@
     left: 0;
 }
 
+.profile {
+    /*padding: 1rem;*/
+}
+
+.profile > .row > .col {
+    padding: 1rem;
+}
+
 .vote-btn-container {
     justify-content: flex-end;
 }
