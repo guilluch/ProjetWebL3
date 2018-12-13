@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
     <!-- Inclusion des fichiers css pour ma bibliothèque css -->
-    <link rel="stylesheet" type="text/css" href="https://pedago.univ-avignon.fr/~uapv1901496/omegadesign/css/omegadesign.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://pedago.univ-avignon.fr/~uapv1901496/omegadesign/css/omegadesign.css">
     <link rel="stylesheet" type="text/css" href="http://omegaserv.net/omegadesign/css/omegadesign.css">
 </head>
 
@@ -21,47 +22,37 @@
     <nav class="navbar">
         <ul>
             <li><a class="waves-effect waves-light" href="?action=index"><i class="material-icons">home</i></a></li>
-<!--            <li><a class="waves-effect waves-light" href="?action=helloWorld">Hello World</a></li>-->
-<!--            <li><a class="waves-effect waves-light" href="?action=superTest&param1=le_premier_parametre&param2=le_second_parametre">SuperTest</a></li>-->
+            <!--            <li><a class="waves-effect waves-light" href="?action=helloWorld">Hello World</a></li>-->
+            <!--            <li><a class="waves-effect waves-light" href="?action=superTest&param1=le_premier_parametre&param2=le_second_parametre">SuperTest</a></li>-->
             <li class="placeholder"></li>
             <?php
-                if (!context::getInstance()->getSessionAttribute('connected')) {
-                    echo '<li><a class="waves-effect waves-light" href="?action=login">Se connecter</a></li>';
-                }
+            if (!context::getInstance()->getSessionAttribute('connected')) {
+                echo '<li><a class="waves-effect waves-light" href="?action=login">Se connecter</a></li>';
+            }
             ?>
             <?php
-                if (context::getInstance()->getSessionAttribute('connected')) {
-                    echo '<li><a class="waves-effect waves-light" href="?action=logout">Se déconnecter</a></li>';
-                }
+            if (context::getInstance()->getSessionAttribute('connected')) {
+                echo '<li><a class="waves-effect waves-light" href="?action=logout">Se déconnecter</a></li>';
+            }
             ?>
         </ul>
     </nav>
 </header>
 
-<h2>Super c'est ton appli ! </h2>
-
-
-<!--VIEW Liste d'amis-->
-<div class="card rounded friends-list">
-    <h3 class="card-header">Liste d'amis</h3>
-    <div class="card-body">
-        <?php
-        foreach ($context->friendsList as $friend) {
-            echo '<div>' . $friend . '</div>';
-        }
-        ?>
-    </div>
-</div>
+<h2>Truiter</h2>
 
 <main class="main">
     <?php
-        if ($context->message !== null) {
-            echo '<div id="notification" class="shadow full-rounded">' . $context->message . '</div>';
-        }
+    if (!context::getInstance()->getSessionAttribute('connected')) {
+        include_once '../view/friendList.php';
+    }
+    if ($context->message !== null) {
+        echo '<div id="notification" class="shadow full-rounded">' . $context->message . '</div>';
+    }
     ?>
     <div class="container">
         <?php
-            include($template_view);
+        include($template_view);
         ?>
     </div>
 </main>

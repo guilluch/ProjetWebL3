@@ -26,9 +26,11 @@ abstract class basemodel {
             $sql = "update " . get_class($this) . " set ";
 
             $set = array();
-            foreach ($this->data as $att => $value)
-                if ($att != 'id' && $value)
+            foreach ($this->data as $att => $value) {
+                if ($att != 'id' && $value) {
                     $set[] = "$att = '" . $value . "'";
+                }
+            }
 
             $sql .= implode(",", $set);
             $sql .= " where id=" . $this->id;

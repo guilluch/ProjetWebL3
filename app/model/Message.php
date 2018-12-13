@@ -1,7 +1,7 @@
 <?php
 
 
-class message extends basemodel {
+class Message extends basemodel {
 
     public function getPost($id) {
         return postTable::getPostById($id);
