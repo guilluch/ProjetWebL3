@@ -26,23 +26,21 @@
             </div>';*/
 
 
+            echo '<div class="profile s12 l4">
+                <img class="avatar" src="';
+            if ($friend['avatar']) {
+                echo $friend['avatar'];
+            } else {
+                echo 'images/avatar.png';
+            }
+            echo '"/><a class="name" href="?action=wall&id=' . $friend['id'] . '">';
+            echo $friend['prenom'] . ' ' . $friend['nom'];
+            echo '</a><span>' . $friend['statut'] . '</span>
+                <span class="birthdate">' . $friend['date_de_naissance'] . '</span></div>';
+
         }
         ?>
     </div>
 </div>
 
-
-<div class="profile shadow much-rounded s12 l3">
-    <div class="row">
-        <img class="avatar" src="<?php
-        if ($friend['avatar']) {
-            echo $friend['avatar'];
-        } else {
-            echo 'images/avatar.png';
-        }
-        ?>"/>
-        <span><?php echo $friend['prenom'] . ' ' . $friend['nom'] ?></span>
-    </div>
-    <span class="row"><?php echo $friend['statut'] ?></span>
-    <span class="row birthdate"><?php echo $friend['date_de_naissance'] ?></span>
-</div>
+<?php

@@ -2,9 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>
-        Ton appli !
-    </title>
+    <title>Truiter</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Let browser know website is optimized for mobile-->
@@ -40,8 +38,6 @@
             if (!context::getInstance()->getSessionAttribute('connected')) {
                 echo '<li><a class="waves-effect waves-light" href="?action=login">Se connecter</a></li>';
             }
-            ?>
-            <?php
             if (context::getInstance()->getSessionAttribute('connected')) {
                 echo '<li><a class="waves-effect waves-light" href="?action=logout">Se déconnecter</a></li>';
             }
@@ -50,16 +46,19 @@
     </nav>
 </header>
 
-<h2>Truiter</h2>
+<!--<h2>Truiter</h2>-->
 
-<main class="main row">
+<main class="main">
     <?php
-    if ($context->message !== null) {
-        echo '<div id="notification" class="shadow full-rounded">' . $context->notification . '</div>';
+    if ($context->notification !== null) {
+        echo '<div class="notification shadow full-rounded">' . $context->notification . '</div>';
     }
     ?>
     <?php
     include($template_view);
+    ?>
+    <?php
+
     ?>
 </main>
 

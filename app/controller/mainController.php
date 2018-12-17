@@ -18,6 +18,7 @@ class mainController {
 
     public static function index($request, $context) {
         $context->loggedUser = context::getInstance()->getSessionAttribute('user');
+        $context->user = context::getInstance()->getSessionAttribute('user');
 //        $context->messages = messageTable::getMessagesSentTo(61);
         $context->messages = messageTable::getLastMessages();
         $context->friendsList = utilisateurTable::getUsers();
@@ -31,6 +32,20 @@ class mainController {
             return context::SUCCESS;
         } else {
             return context::ERROR;
+        }
+    }
+
+    public static function wall($request, $context) {
+        $context->loggedUser = context::getInstance()->getSessionAttribute('user');
+        if (isset($request['id'])) {
+            $id = $request['id'];
+            $context->user = utilisateurTable::getUserById($id);
+            $context->messages = messageTable::getMessagesSentTo($id);
+            return context::SUCCESS;
+        } else {
+            $context->user = context::getInstance()->getSessionAttribute('user');
+            $context->messages = messageTable::getMessagesSentTo($context->user['id']);
+            return context::SUCCESS;
         }
     }
 
@@ -53,16 +68,36 @@ class mainController {
                 return context::ERROR;
             } else {
                 context::getInstance()->setSessionAttribute('connected', true); // On stocke le booleen de connexion dans la variable de session
-                context::getInstance()->setSessionAttribute('prenom', $context->session['prenom']); // On stocke le prenom dans la variable de session
-                context::getInstance()->setSessionAttribute('user', $context->session);
-                $context->message = 'Bonjour, ' . context::getInstance()->getSessionAttribute('prenom'); // On génére un message de bienvenue pour la notification
-                header('Location: ?action=index');
+                context::getInstance()->setSessionAttribute('user', $context->session[0]);
+                $context->notification = 'Bonjour, ' . context::getInstance()->getSessionAttribute('user')['prenom']; // On génére un message de bienvenue pour la notification
+                context::redirect('?action=index');
             }
         }
         return context::SUCCESS;
     }
+
     public static function logout($request, $context) {
         session_destroy();
-        header('Location: ?action=login');
+        context::redirect('?action=login');
+
+    }
+
+    public static function addMessage($request, $context) {
+        /*$postTable = [
+            'texte' => $request['texte'],
+            'date' => date('Y-m-d H:i:s'),
+            'image' => null
+        ];
+        $post = new post($postTable);
+        $postId = $post->save();
+        $messageTable = [
+            'emetteur' => $request['emetteur'],
+            'destinataire' => $request['destinataire'],
+            'parent' => $request['parent'],
+            'post' => $postId
+        ];
+        $message = new message($messageTable);
+        $messageId = $message->save();*/
+        context::redirect('?action=index');
     }
 }

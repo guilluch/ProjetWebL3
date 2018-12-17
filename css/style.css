@@ -1,14 +1,30 @@
-#notification {
+* {
+    word-break: break-word;
+}
+
+.notification {
     padding: 1rem;
     margin: 0 auto 1rem;
 }
 
+.name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+}
 
 .friends-list .card-body > .row {
     align-items: center;
 }
 
+.post-form > div:first-child {
+    position: relative;
+}
+
 .profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 1.5rem;
     box-sizing: border-box;
 }
@@ -27,10 +43,15 @@
 }
 
 .vote-btn {
-    background: inherit !important;
-    color: black !important;
+    background: inherit;
+    color: black;
     width: 2.5rem;
     height: 2.5rem;
+    margin: 0 0.2rem;
+}
+
+.vote-btn:hover {
+    background-color: rgba(0, 0, 0, 0.125);
 }
 
 .avatar {

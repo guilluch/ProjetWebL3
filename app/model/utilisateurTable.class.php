@@ -10,7 +10,7 @@ class utilisateurTable {
         if ($res === false)
             return false;
 
-        return $res[0];
+        return $res;
     }
 
     public static function getUserById($id) {
