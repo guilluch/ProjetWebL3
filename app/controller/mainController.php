@@ -17,15 +17,21 @@ class mainController {
 
 
     public static function index($request, $context) {
-        $context->user = context::getInstance()->getSessionAttribute('user');
-        $context->messages = [
-            'Salut',
-            'Hello',
-            'Yolo'
-        ];
-        $context->messages = messageTable::getMessagesSentTo(8);
-        $context->friendsList = ['Riri', 'Fifi', 'Loulou'];
+        $context->loggedUser = context::getInstance()->getSessionAttribute('user');
+//        $context->messages = messageTable::getMessagesSentTo(61);
+        $context->messages = messageTable::getLastMessages();
+        $context->friendsList = utilisateurTable::getUsers();
         return context::SUCCESS;
+    }
+
+
+    public static function friendsList($request, $context) {
+        if (context::getInstance()->getSessionAttribute('connected')) {
+            $context->friendsList = utilisateurTable::getUsers();
+            return context::SUCCESS;
+        } else {
+            return context::ERROR;
+        }
     }
 
 
@@ -47,8 +53,8 @@ class mainController {
                 return context::ERROR;
             } else {
                 context::getInstance()->setSessionAttribute('connected', true); // On stocke le booleen de connexion dans la variable de session
-                context::getInstance()->setSessionAttribute('prenom', $context->session[0]['prenom']); // On stocke le prenom dans la variable de session
-                context::getInstance()->setSessionAttribute('user', $context->session[0]);
+                context::getInstance()->setSessionAttribute('prenom', $context->session['prenom']); // On stocke le prenom dans la variable de session
+                context::getInstance()->setSessionAttribute('user', $context->session);
                 $context->message = 'Bonjour, ' . context::getInstance()->getSessionAttribute('prenom'); // On génére un message de bienvenue pour la notification
                 header('Location: ?action=index');
             }

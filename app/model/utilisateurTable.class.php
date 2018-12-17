@@ -10,7 +10,7 @@ class utilisateurTable {
         if ($res === false)
             return false;
 
-        return $res;
+        return $res[0];
     }
 
     public static function getUserById($id) {
@@ -25,7 +25,7 @@ class utilisateurTable {
 
     public static function getUsers() {
         $connection = new dbconnection();
-        $sql = "select * from fredouil.utilisateur";
+        $sql = "select distinct * from fredouil.utilisateur order by prenom";
         $res = $connection->doQuery($sql);
         if ($res === false) {
             return false;

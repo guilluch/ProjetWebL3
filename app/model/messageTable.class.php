@@ -12,6 +12,16 @@ class messageTable {
         return $res;
     }
 
+    public static function getLastMessages() {
+        $connection = new dbconnection();
+        $sql = "select * from fredouil.message ORDER BY id DESC LIMIT 50";
+        $res = $connection->doQueryObject($sql, 'message');
+        if ($res === false) {
+            return false;
+        }
+        return $res;
+    }
+
     public static function getMessagesSentTo($id) {
         $connection = new dbconnection();
         $sql = "select * from fredouil.message where destinataire = '" . $id . "'";
