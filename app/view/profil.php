@@ -1,13 +1,16 @@
-<div class="profile shadow much-rounded">
+
+<!--TODO : sans card-->
+
+<div class="profile shadow much-rounded s12 l2">
     <div class="row">
         <div class="col">
-            <img src="images/avatar.png" style="height: 8rem"/>
+            <img class="avatar" src="images/avatar.png"/>
         </div>
         <div class="col">
-            <span>Prénom NOM</span>
-            <span>Date de naissance</span>
-            <span>Statut</span>
+            <span><?php echo $context->user['prenom'] . ' ' . $context->user['nom'] ?></span>
         </div>
     </div>
+    <span class="row">Statut</span>
+    <span class="row">Date de naissance</span>
 </div>
 

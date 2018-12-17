@@ -5,8 +5,8 @@ abstract class basemodel {
 
     public function __construct($table) {
         if (isset($table) && is_array($table)) {
-            foreach ($table as $item) {
-                $this->__set(key($item), $item);
+            foreach ($table as $key => $item) {
+                $this->__set($key, $item);
             }
         }
     }

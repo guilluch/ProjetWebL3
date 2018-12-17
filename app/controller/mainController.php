@@ -17,6 +17,13 @@ class mainController {
 
 
     public static function index($request, $context) {
+        $context->user = context::getInstance()->getSessionAttribute('user');
+        $context->messages = [
+            'Salut',
+            'Hello',
+            'Yolo'
+        ];
+        $context->messages = messageTable::getMessagesSentTo(8);
         $context->friendsList = ['Riri', 'Fifi', 'Loulou'];
         return context::SUCCESS;
     }
@@ -36,18 +43,18 @@ class mainController {
             $context->session = utilisateurTable::getUserByLoginAndPass($request['username'], $request['password']); // On recupere l'utilisateur
             // Si l'utilisateur n'existe pas
             if (!$context->session) {
-                $context->message = 'Erreur avec l\'identifiant ou le mot de passe'; // On génére un message d'erreur pour la notification
+                $context->notification = 'Erreur avec l\'identifiant ou le mot de passe'; // On génére un message d'erreur pour la notification
                 return context::ERROR;
             } else {
                 context::getInstance()->setSessionAttribute('connected', true); // On stocke le booleen de connexion dans la variable de session
                 context::getInstance()->setSessionAttribute('prenom', $context->session[0]['prenom']); // On stocke le prenom dans la variable de session
+                context::getInstance()->setSessionAttribute('user', $context->session[0]);
                 $context->message = 'Bonjour, ' . context::getInstance()->getSessionAttribute('prenom'); // On génére un message de bienvenue pour la notification
                 header('Location: ?action=index');
             }
         }
         return context::SUCCESS;
     }
-
     public static function logout($request, $context) {
         session_destroy();
         header('Location: ?action=login');

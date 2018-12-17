@@ -20,7 +20,7 @@ class utilisateurTable {
         if ($res === false) {
             return false;
         }
-        return $res;
+        return $res[0];
     }
 
     public static function getUsers() {

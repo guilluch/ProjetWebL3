@@ -37,14 +37,10 @@ class dbconnection {
     }
 
     public function doQueryObject($sql, $className) {
-        $prepared = $this->link->prepare($sql);
-        $prepared->execute();
-        $res = $prepared->fetchAll(PDO::FETCH_ASSOC);
+        $res = $this->doQuery($sql);
         $array = array();
-        $class = 'Class'.$className;
         foreach ($res as $row) {
-            $obj = new $class();
-            $obj->data = $row;
+            $obj = new $className($row);
             array_push($array, $obj);
         }
         return $array;
