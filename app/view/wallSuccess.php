@@ -4,6 +4,7 @@ if (context::getInstance()->getSessionAttribute('connected')) {
     include_once 'app/view/profile.php';
     include_once 'app/view/messageList.php';
     echo '</div>';
+    include_once 'app/view/chat.php';
 }
 
 

@@ -19,9 +19,9 @@ class mainController {
     public static function index($request, $context) {
         $context->loggedUser = context::getInstance()->getSessionAttribute('user');
         $context->user = context::getInstance()->getSessionAttribute('user');
-//        $context->messages = messageTable::getMessagesSentTo(61);
         $context->messages = messageTable::getLastMessages();
         $context->friendsList = utilisateurTable::getUsers();
+        $context->chats = array_reverse(chatTable::getLastChats(25));
         return context::SUCCESS;
     }
 
@@ -29,6 +29,7 @@ class mainController {
     public static function friendsList($request, $context) {
         if (context::getInstance()->getSessionAttribute('connected')) {
             $context->friendsList = utilisateurTable::getUsers();
+            $context->chats = array_reverse(chatTable::getLastChats(25));
             return context::SUCCESS;
         } else {
             return context::ERROR;
@@ -41,12 +42,12 @@ class mainController {
             $id = $request['id'];
             $context->user = utilisateurTable::getUserById($id);
             $context->messages = messageTable::getMessagesSentTo($id);
-            return context::SUCCESS;
         } else {
             $context->user = context::getInstance()->getSessionAttribute('user');
             $context->messages = messageTable::getMessagesSentTo($context->user['id']);
-            return context::SUCCESS;
         }
+        $context->chats = array_reverse(chatTable::getLastChats(25));
+        return context::SUCCESS;
     }
 
 
@@ -83,6 +84,56 @@ class mainController {
     }
 
     public static function addMessage($request, $context) {
+        $postTable = [
+            'texte' => $request['texte'],
+            'date' => date('Y-m-d H:i:s'),
+            'image' => NULL
+        ];
+        $post = new post($postTable);
+        $postId = $post->save();
+        $messageTable = [
+            'emetteur' => $request['emetteur'],
+            'destinataire' => $request['destinataire'],
+            'parent' => $request['parent'],
+            'post' => $postId,
+            'aime' => 0
+        ];
+        $message = new message($messageTable);
+        $messageId = $message->save();
+        context::redirect('?action=index');
+    }
+
+    public static function addChat($request, $context) {
+        $postTable = [
+            'texte' => $request['texte'],
+            'date' => date('Y-m-d H:i:s'),
+            'image' => NULL
+        ];
+        $post = new post($postTable);
+        $postId = $post->save();
+        $chatTable = [
+            'emetteur' => $request['emetteur'],
+            'post' => $postId,
+        ];
+        $chat = new chat($chatTable);
+        $chatId = $chat->save();
+        context::redirect('?action=index');
+    }
+
+    public static function like($request, $context) {
+        $messageId = $request['messageId']; //NEED
+        $aime = $request['aime']; //NEED
+
+        $messageTable = [
+            'id' => $messageId,
+            'aime' => ++$aime
+        ];
+        $message = new message($messageTable);
+        $messageId = $message->save();
+        context::redirect('?action=index');
+    }
+
+    public static function share($request, $context) {
         $postTable = [
             'texte' => $request['texte'],
             'date' => date('Y-m-d H:i:s'),

@@ -37,7 +37,6 @@
             echo $friend['prenom'] . ' ' . $friend['nom'];
             echo '</a><span>' . $friend['statut'] . '</span>
                 <span class="birthdate">' . $friend['date_de_naissance'] . '</span></div>';
-
         }
         ?>
     </div>

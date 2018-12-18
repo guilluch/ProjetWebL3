@@ -28,9 +28,9 @@
             <!--            <li><a class="waves-effect waves-light" href="?action=superTest&param1=le_premier_parametre&param2=le_second_parametre">SuperTest</a></li>-->
             <?php
             if (context::getInstance()->getSessionAttribute('connected')) {
-                echo '<li><a class="waves-effect waves-light" href="?action=wall">Mon Mur</a></li>';
-                echo '<li><a class="waves-effect waves-light" href="?action=friendsList">Amis</a></li>';
-                echo '<li><a class="chat-btn waves-effect waves-light">Chat</a></li>';
+                echo '<li><a class="waves-effect waves-light" href="?action=wall"><i class="material-icons">poll</i></a></li>';
+                echo '<li><a class="waves-effect waves-light" href="?action=friendsList"><i class="material-icons">people</i></a></li>';
+                echo '<li><a class="chat-btn waves-effect waves-light"><i class="material-icons">message</i></a></li>';
             }
             ?>
             <li class="placeholder"></li>
@@ -51,14 +51,13 @@
 <main class="main">
     <?php
     if ($context->notification !== null) {
-        echo '<div class="notification shadow full-rounded">' . $context->notification . '</div>';
+        echo '<div class="global-notification shadow full-rounded">' . $context->notification . '</div>';
     }
     ?>
     <?php
     include($template_view);
     ?>
     <?php
-
     ?>
 </main>
 

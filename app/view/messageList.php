@@ -28,10 +28,10 @@
             echo '<img class="post-img shadow" src="' . $message->getPost()->image . '"/>';
         }
         echo '</div>
-            <div class="card-footer vote-btn-container">'.
+            <div class="card-footer vote-btn-container"><span>'.
             $message->aime
-            .'<button class="btn vote-btn full-rounded waves-effect"><i class="material-icons">thumb_up_alt</i></button>
-            <button class="btn vote-btn full-rounded waves-effect"><i class="material-icons">share</i></button>
+            .'</span><a class="btn vote-btn full-rounded waves-effect" href="?action=like&messageId=' . $message->id . '&aime=' . $message->aime . '"><i class="material-icons">thumb_up_alt</i></a>
+            <a class="btn vote-btn full-rounded waves-effect"><i class="material-icons">share</i></a>
             </div>
             </div>';
     }
