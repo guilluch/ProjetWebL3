@@ -20,6 +20,9 @@ class utilisateurTable {
         if ($res === false) {
             return false;
         }
+        if (empty($res)) {
+            return null;
+        }
         return $res[0];
     }
 

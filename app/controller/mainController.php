@@ -28,6 +28,7 @@ class mainController {
 
     public static function friendsList($request, $context) {
         if (context::getInstance()->getSessionAttribute('connected')) {
+            $context->loggedUser = context::getInstance()->getSessionAttribute('user');
             $context->friendsList = utilisateurTable::getUsers();
             $context->chats = array_reverse(chatTable::getLastChats(25));
             return context::SUCCESS;
@@ -43,7 +44,7 @@ class mainController {
             $context->user = utilisateurTable::getUserById($id);
             $context->messages = messageTable::getMessagesSentTo($id);
         } else {
-            $context->user = context::getInstance()->getSessionAttribute('user');
+            $context->user = utilisateurTable::getUserById(context::getInstance()->getSessionAttribute('user')['id']);
             $context->messages = messageTable::getMessagesSentTo($context->user['id']);
         }
         $context->chats = array_reverse(chatTable::getLastChats(25));
@@ -84,10 +85,8 @@ class mainController {
     }
 
     public static function addMessage($request, $context) {
-        print_r($_FILES['image']);
-        exit();
         if(move_uploaded_file($_FILES['image']['tmp_name'],"images/".$_FILES['image']['name'])) {
-            $image = "https://pedago.univ-avignon.fr/~uapv1901496/images/".$_FILES['image']['name'];
+            $image = "https://pedago02a.univ-avignon.fr/~uapv1901496/projet-web-l3/images/".$_FILES['image']['name'];
         }
         else {
             $image = "";
@@ -142,22 +141,41 @@ class mainController {
     }
 
     public static function share($request, $context) {
+        $messageId = $request['messageId'];
+        $messageShared = messageTable::getMessageById($messageId)[0];
         $postTable = [
-            'texte' => $request['texte'],
+            'texte' => $messageShared->getPost()->texte,
             'date' => date('Y-m-d H:i:s'),
-            'image' => NULL
+            'image' => $messageShared->getPost()->image
         ];
         $post = new post($postTable);
         $postId = $post->save();
         $messageTable = [
-            'emetteur' => $request['emetteur'],
-            'destinataire' => $request['destinataire'],
-            'parent' => $request['parent'],
+            'emetteur' => context::getInstance()->getSessionAttribute('user')['id'],
+            'destinataire' => context::getInstance()->getSessionAttribute('user')['id'],
+            'parent' => $messageShared->parent,
             'post' => $postId,
             'aime' => 0
         ];
         $message = new message($messageTable);
         $messageId = $message->save();
         context::redirect('?action=index');
+    }
+
+    public static function updateProfile($request, $context) {
+        if(move_uploaded_file($_FILES['avatar']['tmp_name'],"images/".$_FILES['avatar']['name'])) {
+            $image = "https://pedago02a.univ-avignon.fr/~uapv1901496/projet-web-l3/images/".$_FILES['avatar']['name'];
+        }
+        else {
+            $image = "";
+        }
+        $statut = $request['statut'];
+        $user = new utilisateur([
+            'id' => context::getInstance()->getSessionAttribute('user')['id'],
+            'avatar' => $image,
+            'statut' => $statut
+        ]);
+        $user->save();
+        context::redirect('?action=wall');
     }
 }

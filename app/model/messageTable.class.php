@@ -12,6 +12,16 @@ class messageTable {
         return $res;
     }
 
+    public static function getMessageById($id) {
+        $connection = new dbconnection();
+        $sql = "select * from fredouil.message where id=" . $id;
+        $res = $connection->doQueryObject($sql, 'message');
+        if ($res === false) {
+            return false;
+        }
+        return $res;
+    }
+
     public static function getLastMessages() {
         $connection = new dbconnection();
         $sql = "select * from fredouil.message order by id desc LIMIT 25";
