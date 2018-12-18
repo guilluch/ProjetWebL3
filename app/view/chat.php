@@ -1,4 +1,4 @@
-<div class="post card slight-rounded hoverable"  style="position:absolute; bottom:0">
+<div class="chat card much-rounded">
     <div class="card-header">
         <?php
         $prenom = utilisateurTable::getUserById(10)['prenom'];
@@ -6,12 +6,9 @@
         ?> 
     </div>
     <div class="card-body">
-        <form method="post">
-        <p>
 
-        </p>
-        </form>
+    </div>
     <div class="card-footer vote-btn-container">
-       <input type="text" type="submit" value="Ecrivez votre Message"> 
+       <input type="text" type="submit" value="Ecrivez votre message">
     </div>
 </div>

@@ -75,3 +75,9 @@
     width: 100%;
 }
 
+.chat {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+

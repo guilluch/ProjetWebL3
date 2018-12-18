@@ -30,7 +30,7 @@
             if (context::getInstance()->getSessionAttribute('connected')) {
                 echo '<li><a class="waves-effect waves-light" href="?action=wall">Mon Mur</a></li>';
                 echo '<li><a class="waves-effect waves-light" href="?action=friendsList">Amis</a></li>';
-                echo '<li><a class="waves-effect waves-light" href="?action=chat">Chat</a></li>';
+                echo '<li><a class="chat-btn waves-effect waves-light">Chat</a></li>';
             }
             ?>
             <li class="placeholder"></li>

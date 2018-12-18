@@ -83,10 +83,10 @@ class mainController {
     }
 
     public static function addMessage($request, $context) {
-        /*$postTable = [
+        $postTable = [
             'texte' => $request['texte'],
             'date' => date('Y-m-d H:i:s'),
-            'image' => null
+            'image' => NULL
         ];
         $post = new post($postTable);
         $postId = $post->save();
@@ -94,10 +94,11 @@ class mainController {
             'emetteur' => $request['emetteur'],
             'destinataire' => $request['destinataire'],
             'parent' => $request['parent'],
-            'post' => $postId
+            'post' => $postId,
+            'aime' => 0
         ];
         $message = new message($messageTable);
-        $messageId = $message->save();*/
+        $messageId = $message->save();
         context::redirect('?action=index');
     }
 }

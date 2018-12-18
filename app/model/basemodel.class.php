@@ -16,7 +16,11 @@ abstract class basemodel {
     }
 
     public function __get($name) {
-        return $this->data[$name];
+        if (isset($this->data[$name])) {
+            return $this->data[$name];
+        } else {
+            return NULL;
+        }
     }
 
     public function save() {
@@ -34,10 +38,14 @@ abstract class basemodel {
 
             $sql .= implode(",", $set);
             $sql .= " where id=" . $this->id;
+            /*print_r($sql);
+            exit();*/
         } else {
             $sql = "insert into fredouil." . get_class($this) . " ";
             $sql .= "(" . implode(",", array_keys($this->data)) . ") ";
             $sql .= "values ('" . implode("','", array_values($this->data)) . "')";
+            /*print_r($sql);
+            exit();*/
         }
 
         $connection->doExec($sql);

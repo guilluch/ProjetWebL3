@@ -1,9 +1,9 @@
 <div class="news-feed s12 m9 l6 h-align-center">
     <form class="form post-form" xmlns="http://www.w3.org/1999/html" method="post" action="?action=addMessage">
         <div>
-            <input type="hidden" name="emetteur" value="<?php $context->loggedUser['id'] ?>">
-            <input type="hidden" name="destinataire" value="<?php $context->user['id'] ?>">
-            <input type="hidden" name="parent" value="<?php $context->loggedUser['id'] ?>">
+            <input type="hidden" name="emetteur" value="<?php echo $context->loggedUser['id'] ?>">
+            <input type="hidden" name="destinataire" value="<?php echo $context->user['id'] ?>">
+            <input type="hidden" name="parent" value="<?php echo $context->loggedUser['id'] ?>">
             <textarea id="post-input" class="input" placeholder=" " name="texte"></textarea>
             <label class="internal-label" for="post-input">Message</label>
         </div>
@@ -28,8 +28,9 @@
             echo '<img class="post-img shadow" src="' . $message->getPost()->image . '"/>';
         }
         echo '</div>
-            <div class="card-footer vote-btn-container">
-            <button class="btn vote-btn full-rounded waves-effect"><i class="material-icons">thumb_up_alt</i></button>
+            <div class="card-footer vote-btn-container">'.
+            $message->aime
+            .'<button class="btn vote-btn full-rounded waves-effect"><i class="material-icons">thumb_up_alt</i></button>
             <button class="btn vote-btn full-rounded waves-effect"><i class="material-icons">share</i></button>
             </div>
             </div>';
