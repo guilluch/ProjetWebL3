@@ -7,5 +7,7 @@ $(document).ready(function () {
     });
     $('.chat').draggable({
         containment: 'parent'
+    }).resizable({
+        handles: 'w, e'
     });
 });

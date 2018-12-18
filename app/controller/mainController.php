@@ -84,10 +84,18 @@ class mainController {
     }
 
     public static function addMessage($request, $context) {
+        print_r($_FILES['image']);
+        exit();
+        if(move_uploaded_file($_FILES['image']['tmp_name'],"images/".$_FILES['image']['name'])) {
+            $image = "https://pedago.univ-avignon.fr/~uapv1901496/images/".$_FILES['image']['name'];
+        }
+        else {
+            $image = "";
+        }
         $postTable = [
             'texte' => $request['texte'],
             'date' => date('Y-m-d H:i:s'),
-            'image' => NULL
+            'image' => $image
         ];
         $post = new post($postTable);
         $postId = $post->save();

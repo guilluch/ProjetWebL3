@@ -82,17 +82,21 @@
     display: none;
     position: absolute;
     background-color: white;
-    max-width: 20rem;
+    width: 20rem;
     z-index: 1000;
 }
 
 .chat .card-body {
-    max-height: 20rem;
+    height: 20rem;
     overflow: auto;
 }
 
 .chat-form {
     width: 100%;
     flex-direction: row;
+}
+
+.chat-form > div {
+    width: 100%;
 }
 
