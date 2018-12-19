@@ -29,7 +29,7 @@
             <div class="card-body">';
         echo '<p>' . $message->getPost()->texte . '</p>';
         if ($message->getPost()->image) {
-            echo '<img class="post-img shadow" src="' . $message->getPost()->image . '"/>';
+            echo '<img class="post-img much-rounded" src="' . $message->getPost()->image . '"/>';
         }
         echo '</div>
             <div class="card-footer vote-btn-container"><span>'.

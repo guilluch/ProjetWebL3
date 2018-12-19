@@ -1,5 +1,9 @@
 <div class="chat card much-rounded">
-    <div class="card-header">Chat</div>
+    <div class="card-header" style="display: flex;align-items: center">
+        <span>Chat</span>
+        <span class="placeholder"></span>
+        <a class="close-chat" href=""><i class="material-icons">close</i></a>
+    </div>
     <div class="card-body">
         <?php
         if ($context->chats !== null) {
@@ -14,8 +18,8 @@
         <form class="form chat-form" xmlns="http://www.w3.org/1999/html" method="post" action="?action=addChat">
             <div>
                 <input type="hidden" name="emetteur" value="<?php echo $context->loggedUser['id'] ?>">
-                <textarea id="chat-input" class="input" placeholder=" " name="texte"></textarea>
-                <label class="internal-label" for="post-input">Message</label>
+                <textarea id="chat-input" class="input" placeholder="Message" name="texte"></textarea>
+<!--                <label class="internal-label" for="post-input">Message</label>-->
             </div>
             <input class="btn full-rounded shadow h-align-right" type="submit" value="Poster"/>
         </form>

@@ -1,9 +1,13 @@
 $(document).ready(function () {
     $('.chat-btn').on('click', function (e) {
         e.preventDefault();
-        $('.chat').fadeToggle(300, function () {
-            $('.chat').find('.card-body').animate({ scrollTop: $('.chat').height() + 1000});
-        });
+        $('.chat').find('.card-body').animate({ scrollTop: $('.chat').height() + 1000});
+        $('.chat').fadeIn(300);
+    });
+    $('.close-chat').on('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        $('.chat').fadeOut(300);
     });
     $('.chat').draggable({
         containment: 'parent'
