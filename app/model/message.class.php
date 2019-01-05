@@ -8,15 +8,15 @@ class message extends basemodel {
     }
 
     public function getEmetteur() {
-        return $this->emetteur;
+        return utilisateurTable::getUserById($this->emetteur);
     }
 
     public function getDestinataire() {
-        return $this->destinataire;
+        return utilisateurTable::getUserById($this->destinataire);
     }
 
     public function getParent() {
-        return $this->parent;
+        return utilisateurTable::getUserById($this->parent);
     }
 
     public function getLikes() {

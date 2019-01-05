@@ -11,30 +11,33 @@
     </form>
     <?php
     foreach ($context->messages as $message) {
+        $emetteur = $message->getEmetteur();
+        $parent = $message->getParent();
+        $post = $message->getPost();
         echo '<div class="post card much-rounded hoverable">
             <div class="card-header">
             <img class="avatar" src="';
-        if (utilisateurTable::getUserById($message->emetteur)['avatar']) {
-            echo utilisateurTable::getUserById($message->emetteur)['avatar'];
+        if ($emetteur['avatar']) {
+            echo $emetteur['avatar'];
         } else {
             echo 'images/avatar.png';
         }
         echo '"/>
-            <a class="name" href="?action=wall&id=' . $message->emetteur . '">' . utilisateurTable::getUserById($message->emetteur)['prenom'] . ' ' . utilisateurTable::getUserById($message->emetteur)['nom'] . '</a>';
+            <a class="name" href="?action=wall&id=' . $message->emetteur . '">' . $emetteur['prenom'] . ' ' . $emetteur['nom'] . '</a>';
         if ($message->parent !== $message->emetteur) {
             echo '<div class="placeholder"></div>';
-            echo '<span>Partagé de ' . utilisateurTable::getUserById($message->parent)['prenom'] . ' ' . utilisateurTable::getUserById($message->parent)['nom'] . '</span>';
+            echo '<span>Partagé de ' . $parent['prenom'] . ' ' . $parent['nom'] . '</span>';
         }
         echo '</div>
             <div class="card-body">';
-        echo '<p>' . $message->getPost()->texte . '</p>';
-        if ($message->getPost()->image) {
-            echo '<img class="post-img much-rounded" src="' . $message->getPost()->image . '"/>';
+        echo '<p>' . $post->texte . '</p>';
+        if ($post->image) {
+            echo '<img class="post-img much-rounded" src="' . $post->image . '"/>';
         }
         echo '</div>
             <div class="card-footer vote-btn-container"><span>'.
             $message->aime
-            .'</span><a class="btn vote-btn full-rounded waves-effect" href="?action=like&messageId='
+            .'</span><a class="like btn vote-btn full-rounded waves-effect" onclick="like(event,' . $message->id . ')" href="?action=like&messageId='
             .$message->id . '&aime=' . $message->aime
             . '"><i class="material-icons">thumb_up_alt</i></a>
             

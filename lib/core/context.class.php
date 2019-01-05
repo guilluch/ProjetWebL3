@@ -50,8 +50,16 @@ class context
 		  return false;
 		
 		return  mainController::$action($request,$this);
-		
+
 	}
+
+	public function executeAjaxAction($action, $request) {
+        $this->layout="layout";
+        if(!method_exists('ajaxController',$action))
+            return false;
+
+        return ajaxController::$action($request,$this);
+    }
 	
 	public function getSessionAttribute($attribute)
 	{
