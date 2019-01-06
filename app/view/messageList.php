@@ -23,7 +23,7 @@
             echo 'images/avatar.png';
         }
         echo '"/>
-            <a class="name" href="?action=wall&id=' . $message->emetteur . '">' . $emetteur['prenom'] . ' ' . $emetteur['nom'] . '</a>';
+            <a class="name" onclick="wall(event,' . $message->emetteur . ')" href="?action=wall&id=' . $message->emetteur . '">' . $emetteur['prenom'] . ' ' . $emetteur['nom'] . '</a>';
         if ($message->parent !== $message->emetteur) {
             echo '<div class="placeholder"></div>';
             echo '<span>Partagé de ' . $parent['prenom'] . ' ' . $parent['nom'] . '</span>';
@@ -35,13 +35,13 @@
             echo '<img class="post-img much-rounded" src="' . $post->image . '"/>';
         }
         echo '</div>
-            <div class="card-footer vote-btn-container"><span>'.
+            <div class="card-footer vote-btn-container"><span class="aime">'.
             $message->aime
             .'</span><a class="like btn vote-btn full-rounded waves-effect" onclick="like(event,' . $message->id . ')" href="?action=like&messageId='
             .$message->id . '&aime=' . $message->aime
             . '"><i class="material-icons">thumb_up_alt</i></a>
             
-            <a class="btn vote-btn full-rounded waves-effect" href="?action=share&messageId='
+            <a class="btn vote-btn full-rounded waves-effect" onclick="share(event,' . $message->id . ')" href="?action=share&messageId='
             .$message->id
             .'"><i class="material-icons">share</i></a>
             </div>

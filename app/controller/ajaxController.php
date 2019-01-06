@@ -62,15 +62,6 @@ class ajaxController {
         }
     }
 
-
-    public static function superTest($request, $context) {
-        // On récupère les paramètres de la requête pour les stocker dans le contexte
-        $context->param1 = $request['param1'];
-        $context->param2 = $request['param2'];
-        return context::SUCCESS;
-    }
-
-
     public static function login($request, $context) {
         // Si l'identifiant et le mot de passe ont été rentrés
         if (isset($request['username']) && isset($request['password'])) {
@@ -78,15 +69,21 @@ class ajaxController {
             // Si l'utilisateur n'existe pas
             if (!$context->session) {
                 $context->notification = 'Erreur avec l\'identifiant ou le mot de passe'; // On génére un message d'erreur pour la notification
-                return context::ERROR;
+                return json_encode(['state' => false]);
             } else {
                 context::getInstance()->setSessionAttribute('connected', true); // On stocke le booleen de connexion dans la variable de session
                 context::getInstance()->setSessionAttribute('user', $context->session[0]);
                 $context->notification = 'Bonjour, ' . context::getInstance()->getSessionAttribute('user')['prenom']; // On génére un message de bienvenue pour la notification
-                context::redirect('?action=index');
+                return json_encode(['state' => true]);
             }
         }
-        return json_encode($context);
+        ob_start();
+        include_once 'app/view/loginSuccess.php';
+        $output = ob_get_contents();
+        ob_end_clean();
+        return json_encode([
+            'view' => $output,
+            'context' => $context]);
     }
 
     public static function logout($request, $context) {
@@ -142,16 +139,14 @@ class ajaxController {
 
     public static function like($request, $context) {
         $messageId = $request['messageId']; //NEED
-        $aime = $request['aime']; //NEED
-
+        $messageLiked = messageTable::getMessageById($messageId)[0];
         $messageTable = [
             'id' => $messageId,
-            'aime' => ++$aime
+            'aime' => $messageLiked->getLikes() + 1
         ];
         $message = new message($messageTable);
         $messageId = $message->save();
-//        context::redirect('?action=index');
-        return json_encode(true);
+        return json_encode(['aime' => $message->getLikes()]);
     }
 
     public static function share($request, $context) {
@@ -173,7 +168,6 @@ class ajaxController {
         ];
         $message = new message($messageTable);
         $messageId = $message->save();
-//        context::redirect('?action=index');
         return json_encode(true);
     }
 

@@ -23,14 +23,14 @@
 <header>
     <nav class="navbar">
         <ul>
-            <li><a class="waves-effect waves-light" onclick="index(event)" href="?action=index"><i class="material-icons">home</i></a></li>
+            <li><a class="waves-effect waves-light" onclick="index(event)" href="?action=index"><i class="material-icons">home</i>Accueil</a></li>
             <!--            <li><a class="waves-effect waves-light" href="?action=helloWorld">Hello World</a></li>-->
             <!--            <li><a class="waves-effect waves-light" href="?action=superTest&param1=le_premier_parametre&param2=le_second_parametre">SuperTest</a></li>-->
             <?php
             if (context::getInstance()->getSessionAttribute('connected')) {
-                echo '<li><a class="waves-effect waves-light" href="?action=wall"><i class="material-icons">poll</i></a></li>';
-                echo '<li><a class="waves-effect waves-light" onclick="friendsList(event)" href="?action=friendsList"><i class="material-icons">people</i></a></li>';
-                echo '<li><a class="chat-btn waves-effect waves-light"><i class="material-icons">message</i></a></li>';
+                echo '<li><a class="waves-effect waves-light" onclick="wall(event)" href="?action=wall"><i class="material-icons">poll</i>Mon mur</a></li>';
+                echo '<li><a class="waves-effect waves-light" onclick="friendsList(event)" href="?action=friendsList"><i class="material-icons">people</i>Amis</a></li>';
+                echo '<li><a class="chat-btn waves-effect waves-light"><i class="material-icons">message</i>Chat</a></li>';
             }
             ?>
             <li class="placeholder"></li>
