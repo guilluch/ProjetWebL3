@@ -8,6 +8,16 @@ function getView(url) {
         data = JSON.parse(data);
         $('.view').html(data.view);
         lastAjaxUrl = url;
+        $('.close-chat').on('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('.chat').fadeOut(300);
+        });
+        $('.chat').draggable({
+            containment: 'parent'
+        }).resizable({
+            handles: 'w, e'
+        });
     }).fail(function (error) {
         console.log(error);
     });
@@ -52,20 +62,97 @@ function share(event, messageId) {
     });
 }
 
+function loginView (event) {
+    event.preventDefault();
+    getView('ajax.php?action=login');
+}
+
 function login(event) {
     event.preventDefault();
     $.ajax({
-        url: 'ajax.php?action=login'
+        type: 'post',
+        url: 'ajax.php?action=login',
+        data: $(event.srcElement).serialize()
     }).done(function (data) {
         data = JSON.parse(data);
         if (data.state === false) {
-            notify('Erreur de login ou mot de passe');
+            notify('Erreur de login ou mot de passe', 3000);
         } else if (data.state === true) {
-            getView('ajax.php?action=index');
-        } else {
-            $('.view').html(data.view);
-            lastAjaxUrl = url;
+            document.location.href = '?action=index';
         }
+    }).fail(function (error) {
+        console.log(error);
+    });
+}
+
+function logout(event) {
+    event.preventDefault();
+    $.ajax({
+        url: 'ajax.php?action=logout'
+    }).done(function (data) {
+        data = JSON.parse(data);
+        document.location.href = '?action=login';
+    }).fail(function (error) {
+        console.log(error);
+    });
+}
+
+function addMessage(event) {
+    event.preventDefault();
+    let formData = new FormData(event.srcElement);
+    $.ajax({
+        type: 'post',
+        url: 'ajax.php?action=addMessage',
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false
+    }).done(function (data) {
+        getView(lastAjaxUrl);
+    }).fail(function (error) {
+        console.log(error);
+    });
+}
+
+function addChat(event) {
+    event.preventDefault();
+    $.ajax({
+        type: 'post',
+        url: 'ajax.php?action=addChat',
+        data: $(event.srcElement).serialize()
+    }).done(function (data) {
+        $('#chat-input').val('');
+        reloadChat();
+    }).fail(function (error) {
+        console.log(error);
+    });
+}
+
+function reloadChat() {
+    $.ajax({
+        url: 'ajax.php/?action=reloadChat'
+    }).done(function (data) {
+        data = JSON.parse(data);
+        $('.chat-content').html(data.view);
+    }).fail(function (error) {
+        console.log(error);
+    });
+}
+
+function updateProfile(event) {
+    event.preventDefault();
+    let formData = new FormData(event.srcElement);
+    $.ajax({
+        type: 'post',
+        url: 'ajax.php?action=updateProfile',
+        data: formData,
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false
+    }).done(function (data) {
+        getView('ajax.php?action=wall')
     }).fail(function (error) {
         console.log(error);
     });
@@ -87,4 +174,7 @@ $(document).ready(function () {
     }).resizable({
         handles: 'w, e'
     });
+    setInterval(function () {
+        reloadChat();
+    }, 5000)
 });

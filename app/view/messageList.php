@@ -1,5 +1,5 @@
 <div class="news-feed s12 m9 l6 h-align-center">
-    <form class="form post-form" xmlns="http://www.w3.org/1999/html" method="post" action="?action=addMessage" enctype="multipart/form-data">
+    <form class="form post-form" xmlns="http://www.w3.org/1999/html" method="post" onsubmit="addMessage(event)" action="?action=addMessage" enctype="multipart/form-data">
         <input type="hidden" name="emetteur" value="<?php echo $context->loggedUser['id'] ?>"/>
         <input type="hidden" name="destinataire" value="<?php echo $context->user['id'] ?>"/>
         <input type="hidden" name="parent" value="<?php echo $context->loggedUser['id'] ?>"/>

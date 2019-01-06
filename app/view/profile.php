@@ -1,5 +1,3 @@
-<!--TODO : sans card-->
-
 <div class="profile shadow much-rounded s12 l2">
 <!--    <div class="row">-->
         <img class="avatar" src="<?php
@@ -16,7 +14,7 @@
 
     <?php
     if ($context->loggedUser['id'] === $context->user['id']) {
-        echo '<br/><form class="form profile-form" xmlns="http://www.w3.org/1999/html" method="post" action="?action=updateProfile" enctype="multipart/form-data">
+        echo '<br/><form class="form profile-form" xmlns="http://www.w3.org/1999/html" method="post" onsubmit="updateProfile(event)" action="?action=updateProfile" enctype="multipart/form-data">
             <label>Avatar :</label>
             <input type="file" name="avatar" value="Uploader avatar"/>
             <input type="text" name="statut" placeholder="Changer statut"/>

@@ -1,5 +1,5 @@
 <div class="h-align-center">
-    <form class="form" method="post" action="?action=login">
+    <form class="form" method="post" onsubmit="login(event)" action="?action=login">
         <div class="input-field">
             <input id="username" class="input" type="text" placeholder=" " name="username"/>
             <label for="username" class="internal-label">Identifiant</label>

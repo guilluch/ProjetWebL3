@@ -112,3 +112,6 @@
     margin: 0;
 }
 
+.close-chat {
+    cursor: pointer;
+}

@@ -36,10 +36,10 @@
             <li class="placeholder"></li>
             <?php
             if (!context::getInstance()->getSessionAttribute('connected')) {
-                echo '<li><a class="waves-effect waves-light" href="?action=login">Se connecter</a></li>';
+                echo '<li><a class="waves-effect waves-light" onclick="loginView(event)" href="?action=login">Se connecter</a></li>';
             }
             if (context::getInstance()->getSessionAttribute('connected')) {
-                echo '<li><a class="waves-effect waves-light" href="?action=logout">Se déconnecter</a></li>';
+                echo '<li><a class="waves-effect waves-light" onclick="logout(event)" href="?action=logout">Se déconnecter</a></li>';
             }
             ?>
         </ul>

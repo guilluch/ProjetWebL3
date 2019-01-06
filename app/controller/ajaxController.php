@@ -47,7 +47,7 @@ class ajaxController {
                 $context->messages = messageTable::getMessagesSentTo($id);
             } else {
                 $context->user = utilisateurTable::getUserById(context::getInstance()->getSessionAttribute('user')['id']);
-                $context->messages = messageTable::getMessagesSentTo($context->user['id']);
+                $context->messages = messageTable::getLastMessagesSentTo($context->user['id']);
             }
             $context->chats = array_reverse(chatTable::getLastChats(25));
             ob_start();
@@ -75,6 +75,7 @@ class ajaxController {
                 context::getInstance()->setSessionAttribute('user', $context->session[0]);
                 $context->notification = 'Bonjour, ' . context::getInstance()->getSessionAttribute('user')['prenom']; // On génére un message de bienvenue pour la notification
                 return json_encode(['state' => true]);
+
             }
         }
         ob_start();
@@ -88,8 +89,7 @@ class ajaxController {
 
     public static function logout($request, $context) {
         session_destroy();
-//        context::redirect('?action=login');
-        return json_encode(true);
+        return json_encode(['state' => true]);
     }
 
     public static function addMessage($request, $context) {
@@ -115,8 +115,7 @@ class ajaxController {
         ];
         $message = new message($messageTable);
         $messageId = $message->save();
-//        context::redirect('?action=index');
-        return json_encode(true);
+        return json_encode(['state' => true]);
     }
 
     public static function addChat($request, $context) {
@@ -133,8 +132,18 @@ class ajaxController {
         ];
         $chat = new chat($chatTable);
         $chatId = $chat->save();
-//        context::redirect('?action=index');
-        return json_encode(true);
+        return json_encode(['state' => true]);
+    }
+
+    public static function reloadChat($request, $context) {
+        $context->chats = array_reverse(chatTable::getLastChats(25));
+        ob_start();
+        include_once 'app/view/chatContent.php';
+        $output = ob_get_contents();
+        ob_end_clean();
+        return json_encode([
+            'view' => $output,
+            'context' => $context]);
     }
 
     public static function like($request, $context) {
@@ -179,11 +188,18 @@ class ajaxController {
             $image = "";
         }
         $statut = $request['statut'];
-        $user = new utilisateur([
+        $userData = [];
+        $userData['id'] = context::getInstance()->getSessionAttribute('user')['id'];
+        $userData['avatar'] = $image;
+        if (isset($statut)) {
+            $userData['statut'] = $statut;
+        }
+        $user = new utilisateur($userData);
+        /*[
             'id' => context::getInstance()->getSessionAttribute('user')['id'],
             'avatar' => $image,
             'statut' => $statut
-        ]);
+        ]*/
         $user->save();
 //        context::redirect('?action=wall');
         return json_encode(true);

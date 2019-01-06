@@ -45,7 +45,7 @@ class mainController {
             $context->messages = messageTable::getMessagesSentTo($id);
         } else {
             $context->user = utilisateurTable::getUserById(context::getInstance()->getSessionAttribute('user')['id']);
-            $context->messages = messageTable::getMessagesSentTo($context->user['id']);
+            $context->messages = messageTable::getLastMessagesSentTo($context->user['id']);
         }
         $context->chats = array_reverse(chatTable::getLastChats(25));
         return context::SUCCESS;
