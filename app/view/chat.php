@@ -8,12 +8,10 @@
         <?php include_once 'app/view/chatContent.php'?>
     </div>
     <div class="card-footer">
-<!--       <input type="text" type="submit" placeholder="Message">-->
         <form class="form chat-form" xmlns="http://www.w3.org/1999/html" method="post" onsubmit="addChat(event)" action="?action=addChat">
             <div>
                 <input type="hidden" name="emetteur" value="<?php echo $context->loggedUser['id'] ?>">
                 <textarea id="chat-input" class="input" placeholder="Message" name="texte"></textarea>
-<!--                <label class="internal-label" for="post-input">Message</label>-->
             </div>
             <input class="btn full-rounded shadow h-align-right" type="submit" value="Poster"/>
         </form>

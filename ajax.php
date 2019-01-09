@@ -23,9 +23,5 @@ if ($view === false) {
     echo "Une grave erreur s'est produite, il est probable que l'action " . $action . " n'existe pas...";
     die;
 }
-/*elseif ($view != context::NONE) {
-    $template_view = $nameApp . "/view/" . $action . $view . ".php";
-    include($nameApp . "/layout/" . $context->getLayout() . ".php");
-}*/
 
 ?>

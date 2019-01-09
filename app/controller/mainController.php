@@ -5,6 +5,9 @@
 
 class mainController {
 
+    /*
+     * Action helloWorld
+     */
     public static function helloWorld($request, $context) {
         // Si l'utilisateur est connecté
         if (context::getInstance()->getSessionAttribute('connected')) {
@@ -16,6 +19,9 @@ class mainController {
     }
 
 
+    /*
+     * Action index
+     */
     public static function index($request, $context) {
         $context->loggedUser = context::getInstance()->getSessionAttribute('user');
         $context->user = context::getInstance()->getSessionAttribute('user');
@@ -25,7 +31,9 @@ class mainController {
         return context::SUCCESS;
     }
 
-
+    /*
+     * Action friendsList
+     */
     public static function friendsList($request, $context) {
         if (context::getInstance()->getSessionAttribute('connected')) {
             $context->loggedUser = context::getInstance()->getSessionAttribute('user');
@@ -37,6 +45,9 @@ class mainController {
         }
     }
 
+    /*
+     * Action wall
+     */
     public static function wall($request, $context) {
         $context->loggedUser = context::getInstance()->getSessionAttribute('user');
         if (isset($request['id'])) {
@@ -51,7 +62,9 @@ class mainController {
         return context::SUCCESS;
     }
 
-
+    /*
+     * Action superTest
+     */
     public static function superTest($request, $context) {
         // On récupère les paramètres de la requête pour les stocker dans le contexte
         $context->param1 = $request['param1'];
@@ -59,7 +72,9 @@ class mainController {
         return context::SUCCESS;
     }
 
-
+    /*
+    * Action login
+    */
     public static function login($request, $context) {
         // Si l'identifiant et le mot de passe ont été rentrés
         if (isset($request['username']) && isset($request['password'])) {
@@ -78,12 +93,18 @@ class mainController {
         return context::SUCCESS;
     }
 
+    /*
+    * Action logout
+    */
     public static function logout($request, $context) {
         session_destroy();
         context::redirect('?action=login');
 
     }
 
+    /*
+    * Action addMessage
+    */
     public static function addMessage($request, $context) {
         if(move_uploaded_file($_FILES['image']['tmp_name'],"images/".$_FILES['image']['name'])) {
             $image = "https://pedago02a.univ-avignon.fr/~uapv1901496/projet-web-l3/images/".$_FILES['image']['name'];
@@ -110,6 +131,9 @@ class mainController {
         context::redirect('?action=index');
     }
 
+    /*
+    * Action addChat
+    */
     public static function addChat($request, $context) {
         $postTable = [
             'texte' => $request['texte'],
@@ -127,6 +151,9 @@ class mainController {
         context::redirect('?action=index');
     }
 
+    /*
+    * Action like
+    */
     public static function like($request, $context) {
         $messageId = $request['messageId']; //NEED
         $aime = $request['aime']; //NEED
@@ -140,6 +167,9 @@ class mainController {
         context::redirect('?action=index');
     }
 
+    /*
+    * Action share
+    */
     public static function share($request, $context) {
         $messageId = $request['messageId'];
         $messageShared = messageTable::getMessageById($messageId)[0];
@@ -162,6 +192,9 @@ class mainController {
         context::redirect('?action=index');
     }
 
+    /*
+    * Action updateProfile
+    */
     public static function updateProfile($request, $context) {
         if(move_uploaded_file($_FILES['avatar']['tmp_name'],"images/".$_FILES['avatar']['name'])) {
             $image = "https://pedago02a.univ-avignon.fr/~uapv1901496/projet-web-l3/images/".$_FILES['avatar']['name'];
